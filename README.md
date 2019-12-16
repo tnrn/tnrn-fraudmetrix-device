@@ -11,6 +11,8 @@ FraudmetrixDeviceFingerPrinting for [React Native][rn].
 
 First, `cd` to your RN project directory, and install RNMK through [rnpm](https://github.com/rnpm/rnpm) . If you don't have rnpm, you can install RNMK from npm with the command `npm i -S tnrn-fraudmetrix-device` and link it manually (see below).
 
+
+
 ### Android
 
 * #### React Native < 0.29 (Using rnpm)
