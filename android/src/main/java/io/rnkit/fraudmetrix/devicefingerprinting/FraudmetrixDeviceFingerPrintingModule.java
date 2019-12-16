@@ -33,13 +33,13 @@ public class FraudmetrixDeviceFingerPrintingModule extends ReactContextBaseJavaM
             promise.reject("50000", "args is null!");
         } else {
             try {
-                if (args.hasKey("env") && args.getString("env").equals("sandbox")) {
+                if (args.hasKey("env") && "sandbox".equals(args.getString("env"))) {
                     FMAgent.init(this.reactContext, FMAgent.ENV_SANDBOX);
                 } else {
                     FMAgent.init(this.reactContext, FMAgent.ENV_PRODUCTION);
                 }
                 promise.resolve("ok");
-            } catch (FMException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
                 promise.reject("4001", e.getMessage());
             }
@@ -48,6 +48,7 @@ public class FraudmetrixDeviceFingerPrintingModule extends ReactContextBaseJavaM
 
     @ReactMethod
     public void getDeviceInfo(@Nullable final Promise promise) {
+      try {
         String status = FMAgent.getInitStatus();
         if ("successful".equals(status)) {
             String deviceInfo = FMAgent.onEvent(this.reactContext);
@@ -55,6 +56,9 @@ public class FraudmetrixDeviceFingerPrintingModule extends ReactContextBaseJavaM
         } else {
             promise.reject("10001", "请先进行初始化 -init()");
         }
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
     }
 
 }
